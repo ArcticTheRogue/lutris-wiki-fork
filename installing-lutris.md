@@ -32,11 +32,14 @@ Table of contents
 	- [Installation](#installation-3)
  - [openSUSE](#opensuse)
 	- [Prerequisites](#prerequisites-4)
+		- [AMD](#amd-2)
+		- [Intel](#intel-2)
+		- [Nvidia](#nvidia-4)
 	- [Installation](#installation-4)
  - [Ubuntu / Linux Mint / Other Ubuntu-based distributions](#ubuntu--linux-mint--other-ubuntu-based-distributions)
 	- [Prerequisites](#prerequisites-5)
 		- [AMD / Intel](#amd--intel-2)
-		- [Nvidia](#nvidia-4)
+		- [Nvidia](#nvidia-5)
 	- [Installation](#installation-5)
  - [External Sources](#external-sources)
 
@@ -69,31 +72,44 @@ Then, upgrade the system by executing the following command as root:
 pacman -Syu
 ```
 
+Then, choose your GPU's manufacturer:
+
+- [AMD](#amd)
+- [Intel](#intel)
+- [Nvidia](#nvidia)
+
 #### AMD
 
-To install support for the Vulkan API, execute the following command as root:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 pacman -S lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
 ```
 
+Then, proceed to the [installation](#installation).
+
 #### Intel
 
-To install support for the Vulkan API, execute the following command as root:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 pacman -S lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
 ```
 
+Then, proceed to the [installation](#installation).
+
 #### Nvidia:
 
-To install support for the Vulkan API, you must install the **proprietary** drivers.
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 To install them, execute the following command as root:
 
 ```bash
 pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
 ```
+
+Then, proceed to the [installation](#installation).
+
 ### Installation
 
 To install Lutris, execute the following command as root:
@@ -111,27 +127,31 @@ pacman -S lutris
 
 #### AMD / Intel
 
-To install support for the Vulkan API, execute the following command as root:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 dnf install vulkan-tools mesa-vulkan-drivers vulkan-loader vulkan-validation-layers
 ```
 
+Then, proceed to the [installation](#installation-1).
+
 #### Nvidia
 
-To install support for the Vulkan API, you must follow these steps:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 - enable the [RPM Fusion repository as well as its nonfree repository](https://docs.fedoraproject.org/en-US/quick-docs/setup_rpmfusion/);
 - [determine your GPU's model](https://rpmfusion.org/Howto/NVIDIA#Determining_your_card_model);
 - [install the drivers for the appropriate model](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers).
 
-To install support for the Vulkan API, execute the following command as root:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 dnf install vulkan-tools mesa-vulkan-drivers vulkan-loader vulkan-validation-layers
 ```
 
 **(Optional): during this installation, `DNF` will ask if the GPG fingerprint is correct.  You can check if it is correct in [RPM Fusion's page](https://rpmfusion.org/keys) to make sure that the fingerprint you check matches your version of Fedora.**
+
+Then, proceed to the [installation](#installation-1).
 
 ### Installation
 
@@ -150,31 +170,37 @@ dnf install lutris
 
 If you are using an AMD GPU, you will have to read through the [AMD GPU Gentoo wiki](https://wiki.gentoo.org/wiki/Amdgpu) page before proceeding.
 
-Then, to install support for the Vulkan API, execute the following command as root:
+Then, to install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 emerge --ask --verbose dev-util/vulkan-tools dev-util/vulkan-headers media-libs/vulkan-layers media-libs/vulkan-loader
 ```
+
+Then proceed to the [installation](#installation-2).
 
 #### Intel
 
 If you are using an Intel iGPU, you will have to read through the [Intel Gentoo wiki](https://wiki.gentoo.org/wiki/Intel) page before proceeding.
 
-Then, to install support for the Vulkan API, execute the following command as root:
+Then, to install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 emerge --ask --verbose dev-util/vulkan-tools dev-util/vulkan-headers media-libs/vulkan-layers media-libs/vulkan-loader
 ```
 
+Then proceed to the [installation](#installation-2).
+
 #### Nvidia
 
 If you are using an Nvidia GPU, you will have to read through the [Nvidia-drivers Gentoo wiki](https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers) page before proceeding.
 
-Then, to install support for the Vulkan API, execute the following command as root:
+Then, to install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 emerge --ask --verbose dev-util/vulkan-tools dev-util/vulkan-headers media-libs/vulkan-loader
 ```
+
+Then proceed to the [installation](#installation-2).
 
 ### Installation
 
@@ -191,7 +217,7 @@ emerge --ask --verbose games-util/lutris
 
 #### AMD / Intel
 
-To install support for the Vulkan API, your `*.nix` (e.g. `configuration.nix`) must have the following as **system packages**:
+To install support for the Vulkan API and its tools, your `*.nix` (e.g. `configuration.nix`) must have the following as **system packages**:
 
 - `pkgs.vulkan-headers`;
 - `pkgs.vulkan-loader`;
@@ -210,9 +236,11 @@ Then, execute the following command as root:
 nixos-rebuild switch
 ```
 
+Then proceed to the [installation](#installation-3).
+
 #### Nvidia
 
-To install support for the Vulkan API, you will have to install the **proprietary** drivers.
+To install support for the Vulkan API and its tools, you will have to install the **proprietary** drivers.
 
 To install them, you will have to refer to the [NixOS wiki](https://nixos.wiki/wiki/Nvidia).
 
@@ -233,6 +261,8 @@ At last, execute the following command as root:
 nixos-rebuild switch
 ```
 
+Then, proceed to the [installation](#installation-3).
+
 ### Installation
 
 To install Lutris, your `*.nix` (e.g. `configuration.nix`) must have Lutris (`pkgs.lutris-unwrapped`) as a **system package**
@@ -252,9 +282,51 @@ nixos-rebuild switch
 
 ## openSUSE
 
+**Note: this _should_ apply in both openSUSE Leap and openSUSE Tumbleweed.** 
+
 ### Prerequisites
 
+#### AMD
+
+To install support for the Vulkan API and its tools, execute the following command as root:
+
+```bash
+zypper install libvulkan_radeon libvulkan_radeon-32bit vulkan-tools vulkan-loader vulkan-headers vulkan-validationlayers
+```
+
+Then, proceed to the [installation](#installation-4).
+
+#### Intel
+
+To install support for the Vulkan API and its tools, execute the following command as root:
+
+```bash
+zypper install libvulkan_intel libvulkan_intel-32bit vulkan-tools vulkan-loader vulkan-headers vulkan-validationlayers
+```
+
+Then, proceed to the [installation](#installation-4).
+
+#### Nvidia
+
+To install support for the Vulkan API and its tools, you will have to install its **proprietary** drivers first.
+
+To install them, you will have to refer to the [openSUSE wiki](https://en.opensuse.org/SDB:NVIDIA).
+
+Then, to install support for the Vulkan API and its tools, execute the following command as root:
+
+```bash
+zypper install vulkan-tools vulkan-loader vulkan-headers vulkan-validationlayers
+```
+
+Then, proceed to the [installation](#installation-4).
+
 ### Installation
+
+To install Lutris, execute the following command as root:
+
+```bash
+zypper install lutris
+```
 
 
 ## Ubuntu / Linux Mint / Other Ubuntu-based distributions:
@@ -274,7 +346,7 @@ Install support for 32-bit games:
 apt install libgl1-mesa-dri:i386
 ```
 
-To install support for the Vulkan API, execute the following command as root:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 apt install mesa-vulkan-drivers mesa-vulkan-drivers:i386
@@ -308,7 +380,7 @@ Install the 430.40 driver:
 apt install nvidia-driver-430 libnvidia-gl-430 libnvidia-gl-430:i386
 ```
 
-To install support for the Vulkan API, execute the following command as root:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 apt install libvulkan1 libvulkan1:i386
@@ -343,7 +415,7 @@ Install support for 32-bit games:
 apt install libgl1-mesa-glx:i386 libgl1-mesa-dri:i386
 ```
 
-To install support for the Vulkan API, execute the following command as root:
+To install support for the Vulkan API and its tools, execute the following command as root:
 
 ```bash
 apt install mesa-vulkan-drivers mesa-vulkan-drivers:i386
